@@ -7,10 +7,6 @@ import {
   GraphQLNonNull,
   GraphQLFieldConfig,
 } from 'gatsby/graphql'
-<<<<<<< HEAD
-import { GatsbyOnNodeTypeContext, PluginContext } from '../types/gatsby'
-=======
->>>>>>> 5df5066569fd92d6ef60873a38b8c345d21d82e4
 import {PluginConfig} from '../gatsby-node'
 import {getCacheKey, CACHE_KEYS} from '../util/cache'
 import {
@@ -36,10 +32,6 @@ const ImageFormatType = new GraphQLEnumType({
 const extensions = new Map()
 
 export function extendImageNode(
-<<<<<<< HEAD
-  context: PluginContext & GatsbyOnNodeTypeContext,
-=======
->>>>>>> 5df5066569fd92d6ef60873a38b8c345d21d82e4
   config: PluginConfig,
 ): {[key: string]: GraphQLFieldConfig<any, any>} {
   const key = getCacheKey(config, CACHE_KEYS.IMAGE_EXTENSIONS)

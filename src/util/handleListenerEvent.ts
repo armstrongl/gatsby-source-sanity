@@ -1,24 +1,15 @@
 import {SourceNodesArgs} from 'gatsby'
 import {MutationEvent} from '@sanity/client'
 import debug from '../debug'
-<<<<<<< HEAD
-import {PluginContext, GatsbyNode} from '../types/gatsby'
-=======
 import {SanityInputNode, SanityNode} from '../types/gatsby'
->>>>>>> 5df5066569fd92d6ef60873a38b8c345d21d82e4
 import {processDocument, ProcessingOptions} from './normalize'
 import {removeGatsbyInternalProps} from './removeGatsbyInternalProps'
 import {unprefixId, isDraftId, safeId} from './documentIds'
 
 export function handleListenerEvent(
   event: MutationEvent,
-<<<<<<< HEAD
-  publishedNodes: Map<string, GatsbyNode>,
-  context: PluginContext,
-=======
   publishedNodes: Map<string, SanityNode | SanityInputNode>,
   args: SourceNodesArgs,
->>>>>>> 5df5066569fd92d6ef60873a38b8c345d21d82e4
   processingOptions: ProcessingOptions,
 ) {
   const {actions, createNodeId, getNode} = args

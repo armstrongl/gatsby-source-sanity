@@ -11,17 +11,9 @@ export const removeGatsbyInternalProps = (node: SanityNode | SanityInputNode): S
   return {
     ...node,
     internal: {
-<<<<<<< HEAD
-      // TODO: Figure out what to set this to
-      owner: ``,
-      mediaType,
-      type,
-      contentDigest
-=======
       mediaType,
       type,
       contentDigest,
->>>>>>> 5df5066569fd92d6ef60873a38b8c345d21d82e4
     },
   }
 }

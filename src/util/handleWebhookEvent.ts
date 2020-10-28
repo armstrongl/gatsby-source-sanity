@@ -1,21 +1,13 @@
 import {SourceNodesArgs} from 'gatsby'
 import {SanityClient} from '@sanity/client'
 import debug from '../debug'
-<<<<<<< HEAD
-import {PluginContext, GatsbyNode} from '../types/gatsby'
-=======
 import {SanityNode} from '../types/gatsby'
->>>>>>> 5df5066569fd92d6ef60873a38b8c345d21d82e4
 import {SanityDocument, SanityWebhookBody} from '../types/sanity'
 import {processDocument, ProcessingOptions, getTypeName} from './normalize'
 import {unprefixId, safeId} from './documentIds'
 
 export async function handleWebhookEvent(
-<<<<<<< HEAD
-  context: PluginContext,
-=======
   args: SourceNodesArgs & {webhookBody?: SanityWebhookBody},
->>>>>>> 5df5066569fd92d6ef60873a38b8c345d21d82e4
   options: {client: SanityClient; processingOptions: ProcessingOptions},
 ): Promise<boolean> {
   const {webhookBody, reporter} = args
@@ -64,11 +56,7 @@ export async function handleWebhookEvent(
   return true
 }
 
-<<<<<<< HEAD
-function handleDeletedDocuments(context: PluginContext, ids: string[]) {
-=======
 function handleDeletedDocuments(context: SourceNodesArgs, ids: string[]) {
->>>>>>> 5df5066569fd92d6ef60873a38b8c345d21d82e4
   const {actions, createNodeId, getNode} = context
   const {deleteNode} = actions
 
@@ -83,11 +71,7 @@ function handleDeletedDocuments(context: SourceNodesArgs, ids: string[]) {
 }
 
 function handleChangedDocuments(
-<<<<<<< HEAD
-  context: PluginContext,
-=======
   args: SourceNodesArgs,
->>>>>>> 5df5066569fd92d6ef60873a38b8c345d21d82e4
   changedDocs: SanityDocument[],
   processingOptions: ProcessingOptions,
   action: 'created' | 'updated',

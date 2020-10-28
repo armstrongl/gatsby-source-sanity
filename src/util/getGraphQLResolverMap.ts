@@ -6,11 +6,6 @@ import {PluginConfig} from '../gatsby-node'
 import {GatsbyResolverMap, GatsbyNodeModel, GatsbyGraphQLContext} from '../types/gatsby'
 import {TypeMap, FieldDef} from './remoteGraphQLSchema'
 import {getTypeName, getConflictFreeFieldName} from './normalize'
-<<<<<<< HEAD
-import {SanityRef} from '../types/sanity'
-import {GraphQLFieldResolver} from 'gatsby/graphql'
-=======
->>>>>>> 5df5066569fd92d6ef60873a38b8c345d21d82e4
 import {resolveReferences} from './resolveReferences'
 
 export function getGraphQLResolverMap(
