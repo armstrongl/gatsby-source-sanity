@@ -1,3 +1,4 @@
+import {Reporter} from 'gatsby'
 import {
   ASTNode,
   DefinitionNode,
@@ -22,7 +23,10 @@ import {
 import {camelCase} from 'lodash'
 import {PluginConfig} from '../gatsby-node'
 import {RESTRICTED_NODE_FIELDS, getConflictFreeFieldName} from './normalize'
+<<<<<<< HEAD
 import { Reporter } from 'gatsby'
+=======
+>>>>>>> 5df5066569fd92d6ef60873a38b8c345d21d82e4
 
 interface AstRewriterContext {
   reporter: Reporter
@@ -44,7 +48,7 @@ function transformAst(ast: DocumentNode, context: AstRewriterContext): ASTNode {
     ...ast,
     definitions: ast.definitions
       .filter(isWantedAstNode)
-      .map(node => transformDefinitionNode(node, context, ast))
+      .map((node) => transformDefinitionNode(node, context, ast))
       .concat(getResolveReferencesConfigType()),
   }
 }
@@ -78,8 +82,8 @@ function transformObjectTypeDefinition(
 ): ObjectTypeDefinitionNode {
   const scalars = ast.definitions
     .filter((def): def is ScalarTypeDefinitionNode => def.kind === 'ScalarTypeDefinition')
-    .map(scalar => scalar.name.value)
-    .concat(specifiedScalarTypes.map(scalar => scalar.name))
+    .map((scalar) => scalar.name.value)
+    .concat(specifiedScalarTypes.map((scalar) => scalar.name))
 
   const fields = node.fields || []
   const jsonTargets = fields
@@ -102,8 +106,8 @@ function transformObjectTypeDefinition(
     directives: [{kind: 'Directive', name: {kind: 'Name', value: 'dontInfer'}}],
     fields: [
       ...fields
-        .filter(field => !isJsonAlias(field))
-        .map(field => transformFieldNodeAst(field, node, context)),
+        .filter((field) => !isJsonAlias(field))
+        .map((field) => transformFieldNodeAst(field, node, context)),
       ...blockFields,
       ...rawFields,
     ],
@@ -115,7 +119,7 @@ function getRawFields(
   scalars: string[],
 ): FieldDefinitionNode[] {
   return fields
-    .filter(field => isJsonAlias(field) || !isScalar(field, scalars))
+    .filter((field) => isJsonAlias(field) || !isScalar(field, scalars))
     .reduce((acc, field) => {
       const jsonAlias = getJsonAliasTarget(field)
       const name = jsonAlias || field.name.value
@@ -162,7 +166,7 @@ function transformInterfaceTypeDefinition(
   const fields = node.fields || []
   return {
     ...node,
-    fields: fields.map(field => transformFieldNodeAst(field, node, context)),
+    fields: fields.map((field) => transformFieldNodeAst(field, node, context)),
     name: {...node.name, value: getTypeName(node.name.value)},
   }
 }
@@ -177,12 +181,12 @@ function unwrapType(typeNode: TypeNode): NamedTypeNode {
 }
 
 function getJsonAliasTarget(field: FieldDefinitionNode): string | null {
-  const alias = (field.directives || []).find(dir => dir.name.value === 'jsonAlias')
+  const alias = (field.directives || []).find((dir) => dir.name.value === 'jsonAlias')
   if (!alias) {
     return null
   }
 
-  const forArg = (alias.arguments || []).find(arg => arg.name.value === 'for')
+  const forArg = (alias.arguments || []).find((arg) => arg.name.value === 'for')
   if (!forArg) {
     return null
   }
@@ -306,7 +310,7 @@ function maybeRewriteFieldName(
 
 function isDocumentType(node: ObjectTypeDefinitionNode): boolean {
   return (node.interfaces || []).some(
-    iface =>
+    (iface) =>
       iface.kind === 'NamedType' &&
       (iface.name.value === 'SanityDocument' || iface.name.value === 'Document'),
   )

@@ -1,17 +1,12 @@
-import {set, startCase, camelCase, cloneDeep, upperFirst} from 'lodash'
+import {Actions, NodePluginArgs} from 'gatsby'
 import {extractWithPath} from '@sanity/mutator'
 import {specifiedScalarTypes} from 'gatsby/graphql'
+import {set, startCase, camelCase, cloneDeep, upperFirst} from 'lodash'
 import {SanityDocument} from '../types/sanity'
 import {safeId} from './documentIds'
 import {unprefixDraftId} from './unprefixDraftId'
 import {TypeMap} from './remoteGraphQLSchema'
-import {
-  GatsbyNodeIdCreator,
-  GatsbyContentDigester,
-  GatsbyNode,
-  GatsbyNodeCreator,
-  GatsbyParentChildLinker,
-} from '../types/gatsby'
+import {SanityInputNode} from '../types/gatsby'
 
 const scalarTypeNames = specifiedScalarTypes.map((def) => def.name).concat(['JSON', 'Date'])
 
@@ -23,16 +18,16 @@ export const RESTRICTED_NODE_FIELDS = ['id', 'children', 'parent', 'fields', 'in
 
 export interface ProcessingOptions {
   typeMap: TypeMap
-  createNode: GatsbyNodeCreator
-  createNodeId: GatsbyNodeIdCreator
-  createContentDigest: GatsbyContentDigester
-  createParentChildLink: GatsbyParentChildLinker
+  createNode: Actions['createNode']
+  createNodeId: NodePluginArgs['createNodeId']
+  createContentDigest: NodePluginArgs['createContentDigest']
+  createParentChildLink: Actions['createParentChildLink']
   overlayDrafts: boolean
   skipCreate?: boolean
 }
 
 // Transform a Sanity document into a Gatsby node
-export function processDocument(doc: SanityDocument, options: ProcessingOptions): GatsbyNode {
+export function processDocument(doc: SanityDocument, options: ProcessingOptions): SanityInputNode {
   const {createNode, createNodeId, createContentDigest, overlayDrafts, skipCreate} = options
 
   const rawAliases = getRawAliases(doc, options)
